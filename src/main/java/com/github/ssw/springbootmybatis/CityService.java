@@ -1,7 +1,6 @@
 package com.github.ssw.springbootmybatis;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +19,10 @@ public class CityService {
 
     public List<City> getAllCity() {
         return cityMapper.selectAllCity();
+    }
+
+    public City findByName(String name) {
+        return cityMapper.findByName(name);
     }
 
     public void addCity(City city) {
