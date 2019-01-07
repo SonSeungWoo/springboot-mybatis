@@ -3,7 +3,6 @@ package com.github.ssw.springbootmybatis;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -29,6 +28,12 @@ public class CityServiceTest {
     public void getAllCity() {
         List<City> cities = service.getAllCity();
         log.debug("cities : {}", cities);
+    }
+
+    @Test
+    public void findByName() {
+        City city = service.findByName("서울");
+        log.debug("city : {}", city);
     }
 
 
