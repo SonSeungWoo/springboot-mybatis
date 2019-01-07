@@ -15,7 +15,6 @@ import java.util.List;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @Transactional
-@MapperScan(basePackages = "com.github.ssw.springbootmybatis")
 public class CityServiceTest {
     @Autowired
     CityService service;
