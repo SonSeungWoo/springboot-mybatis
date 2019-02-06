@@ -21,19 +21,19 @@ public class CityServiceTest {
     @Test
     public void getCityById() {
         City city = service.getCityById(1L);
-        log.debug("city : {}", city);
+        log.info("city : {}", city);
     }
 
     @Test
     public void getAllCity() {
         List<City> cities = service.getAllCity();
-        log.debug("cities : {}", cities);
+        log.info("cities : {}", cities);
     }
 
     @Test
     public void findByName() {
         City city = service.findByName("서울");
-        log.debug("city : {}", city);
+        log.info("city : {}", city);
     }
 
 

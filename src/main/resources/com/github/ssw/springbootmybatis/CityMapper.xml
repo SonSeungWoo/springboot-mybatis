@@ -5,6 +5,13 @@
 
 <mapper namespace="com.github.ssw.springbootmybatis.CityMapper">
 
+    <resultMap id="cityResult" type="CityDto">
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="country" property="country" />
+        <result column="population" property="population" />
+    </resultMap>
+
     <select id="selectCityById" resultType="city">
         SELECT ID
               ,NAME
@@ -14,7 +21,7 @@
          WHERE ID = #{id}
     </select>
 
-    <select id="selectAllCity" resultType="city">
+    <select id="selectAllCity" resultMap="cityResult">
         SELECT ID
               ,NAME
               ,COUNTRY
