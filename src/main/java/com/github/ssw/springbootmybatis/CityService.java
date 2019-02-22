@@ -13,19 +13,19 @@ public class CityService {
 
     private final CityMapper cityMapper;
 
-    public City getCityById(Long id) {
-        return cityMapper.selectCityById(id);
+    public City getCityById(Long cityId) {
+        return cityMapper.selectCityById(cityId);
     }
 
     public List<City> getAllCity() {
         return cityMapper.selectAllCity();
     }
 
-    public City findByName(String name) {
-        return cityMapper.findByName(name);
-    }
-
     public void addCity(City city) {
         cityMapper.insertCity(city);
+    }
+
+    public void update(City city){
+        cityMapper.update(city);
     }
 }

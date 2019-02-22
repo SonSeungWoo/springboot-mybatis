@@ -30,12 +30,6 @@ public class CityServiceTest {
         log.info("cities : {}", cities);
     }
 
-    @Test
-    public void findByName() {
-        City city = service.findByName("서울");
-        log.info("city : {}", city);
-    }
-
 
     @Test
     public void addCities() {

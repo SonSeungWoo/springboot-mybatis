@@ -13,25 +13,24 @@
     </resultMap>
 
     <select id="selectCityById" resultType="city">
-        SELECT ID
-              ,NAME
-              ,COUNTRY
-              ,POPULATION
+        SELECT *
           FROM CITY
-         WHERE ID = #{id}
+         WHERE CITY_ID = #{cityId}
     </select>
 
-    <select id="selectAllCity" resultMap="cityResult">
-        SELECT ID
-              ,NAME
-              ,COUNTRY
-              ,POPULATION
-          FROM CITY
+    <select id="selectAllCity" resultType="city" parameterType="city">
+        SELECT * FROM CITY
     </select>
 
     <insert id="insertCity">
       INSERT INTO CITY (NAME, COUNTRY, POPULATION)
       VALUES (#{name}, #{country}, #{population})
     </insert>
+
+    <update id="update" parameterType="city">
+      update CITY set
+      NAME = #{name}
+      where CITY_ID = #{cityId}
+    </update>
 
 </mapper>
