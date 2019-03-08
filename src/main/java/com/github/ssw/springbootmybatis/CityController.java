@@ -1,5 +1,7 @@
 package com.github.ssw.springbootmybatis;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,8 @@ public class CityController {
 
     private final CityService cityService;
 
+    private final ObjectMapper objectMapper;
+
     @GetMapping
     public ResponseEntity<List<City>> select(){
         List<City> cityList = cityService.getAllCity();
@@ -36,5 +40,11 @@ public class CityController {
     public ResponseEntity<String> update(@RequestBody City city){
         cityService.update(city);
         return ResponseEntity.ok("성공");
+    }
+
+    @PostMapping("/test")
+    public List<CityDto> test(@RequestBody RequestDto requestDto){
+        List<CityDto> cityDtoList = objectMapper.convertValue(requestDto.getData(), new TypeReference<List<CityDto>>() {});
+        return cityDtoList;
     }
 }
