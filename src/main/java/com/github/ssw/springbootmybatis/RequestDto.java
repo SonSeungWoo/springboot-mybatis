@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Data
 public class RequestDto<T> {
-    private T data;
+    private T request;
     private List<T> list;
 
 }

@@ -2,6 +2,8 @@ package com.github.ssw.springbootmybatis;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by Leo.
  * User: sonseungwoo
@@ -11,6 +13,8 @@ import lombok.Data;
 
 @Data
 public class CityDto {
+
+    @NotNull(message = "{com.msg}")
     private Long id;
     private String name;
     private String country;

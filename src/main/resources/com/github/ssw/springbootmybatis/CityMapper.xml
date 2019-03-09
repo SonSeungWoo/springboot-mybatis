@@ -19,7 +19,15 @@
     </select>
 
     <select id="selectAllCity" resultType="city" parameterType="city">
-        SELECT * FROM CITY
+        select *
+        from (SELECT *
+        FROM (
+        SELECT rownum rnum, *
+        FROM CITY
+        ) city
+        where 3 >= rnum
+        )
+        where rnum >= 1;
     </select>
 
     <insert id="insertCity">

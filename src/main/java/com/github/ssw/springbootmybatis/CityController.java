@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -42,9 +43,9 @@ public class CityController {
         return ResponseEntity.ok("성공");
     }
 
-    @PostMapping("/test")
-    public List<CityDto> test(@RequestBody RequestDto requestDto){
-        List<CityDto> cityDtoList = objectMapper.convertValue(requestDto.getData(), new TypeReference<List<CityDto>>() {});
-        return cityDtoList;
+    @PostMapping
+    public String svaeTest(@Valid @RequestBody RequestDto<List<City>> requestDto){
+        requestDto.getRequest().forEach(city -> cityService.addCity(city));
+        return "SUCCESS";
     }
 }

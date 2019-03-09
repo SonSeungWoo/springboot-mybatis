@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class CityService {
 
@@ -21,11 +21,13 @@ public class CityService {
         return cityMapper.selectAllCity();
     }
 
+    @Transactional
     public void addCity(City city) {
         cityMapper.insertCity(city);
     }
 
+
     public void update(City city){
-        cityMapper.update(city);
+        addCity(city);
     }
 }
