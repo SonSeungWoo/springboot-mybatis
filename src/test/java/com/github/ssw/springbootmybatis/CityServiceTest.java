@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -20,22 +21,24 @@ public class CityServiceTest {
 
     @Test
     public void getCityById() {
-        City city = service.getCityById(1L);
-        log.info("city : {}", city);
+        //City city = service.getCityById(1L);
+        //log.info("city : {}", city);
     }
 
     @Test
     public void getAllCity() {
-        List<City> cities = service.getAllCity();
-        log.info("cities : {}", cities);
+        //List<City> cities = service.getAllCity();
+        //log.info("cities : {}", cities);
     }
 
 
     @Test
     public void addCities() {
-        service.addCity(new City("뉴욕", "미국", 1_000_000L));
-        service.addCity(new City("런던", "영국", 2_000_000L));
-        service.addCity(new City("파리", "프랑스", 3_000_000L));
+        List<City> cityList = new ArrayList<>();
+        cityList.add(new City("뉴욕", "미국", 1_000_000L));
+        cityList.add(new City("런던", "영국", 2_000_000L));
+        cityList.add(new City("파리", "프랑스", 3_000_000L));
+        service.addCity(cityList);
     }
 
 }

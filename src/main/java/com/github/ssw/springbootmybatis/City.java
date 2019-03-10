@@ -5,7 +5,7 @@ import org.apache.ibatis.type.Alias;
 
 @Data
 @Alias("city")
-public class City {
+public class City{
 
     private Long cityId;
     private String cityCode;

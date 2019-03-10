@@ -5,11 +5,12 @@
 
 <mapper namespace="com.github.ssw.springbootmybatis.CityMapper">
 
-    <resultMap id="cityResult" type="CityDto">
-        <result column="id" property="id" />
-        <result column="name" property="name" />
-        <result column="country" property="country" />
-        <result column="population" property="population" />
+    <resultMap id="cityResult" type="city">
+        <result column="cityId" property="cityId"/>
+        <result column="cityCode" property="cityCode"/>
+        <result column="name" property="name"/>
+        <result column="country" property="country"/>
+        <result column="population" property="population"/>
     </resultMap>
 
     <select id="selectCityById" resultType="city">
@@ -18,22 +19,50 @@
          WHERE CITY_ID = #{cityId}
     </select>
 
-    <select id="selectAllCity" resultType="city" parameterType="city">
+    <select id="selectAllCity" resultType="city" parameterType="com.github.ssw.springbootmybatis.CityDto$CityData">
         select *
         from (SELECT *
         FROM (
         SELECT rownum rnum, *
         FROM CITY
         ) city
-        where 3 >= rnum
+        where <![CDATA[ #{endPage} >= rnum ]]>
         )
-        where rnum >= 1;
+        where <![CDATA[ rnum >= #{startPage}
+
+        ]]>
+    </select>
+
+    <select id="totalCount" resultType="java.lang.Integer">
+        SELECT count (*) FROM CITY
     </select>
 
     <insert id="insertCity">
       INSERT INTO CITY (NAME, COUNTRY, POPULATION)
       VALUES (#{name}, #{country}, #{population})
     </insert>
+
+    <update id="mergeCity" parameterType="city">
+        MERGE INTO CITY ci
+        USING DUAL
+        ON ( ci.CITY_ID = #{cityId} )
+        WHEN MATCHED THEN
+        UPDATE SET
+        NAME = #{name}
+        ,COUNTRY = #{country}
+        WHEN NOT MATCHED THEN
+        INSERT (
+            CITY_CODE
+            , NAME
+            , COUNTRY
+            , POPULATION
+          ) values (
+            #{cityCode}
+            , #{name}
+            , #{country}
+            , #{population}
+          )
+    </update>
 
     <update id="update" parameterType="city">
       update CITY set

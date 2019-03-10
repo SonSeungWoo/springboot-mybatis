@@ -2,21 +2,20 @@ package com.github.ssw.springbootmybatis;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
-
 /**
  * Created by Leo.
  * User: sonseungwoo
- * Date: 2019-02-06
- * Time: 14:37
+ * Date: 2019-03-10
+ * Time: 13:35
  */
-
-@Data
 public class CityDto {
 
-    @NotNull(message = "{com.msg}")
-    private Long id;
-    private String name;
-    private String country;
-    private Long population;
+    @Data
+    public static class CityData extends Paging{
+        private Long cityId;
+        private String cityCode;
+        private String name;
+        private String country;
+        private Long population;
+    }
 }

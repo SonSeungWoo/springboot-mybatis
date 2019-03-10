@@ -1,13 +1,12 @@
 package com.github.ssw.springbootmybatis;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Leo.
@@ -23,29 +22,43 @@ public class CityController {
 
     private final CityService cityService;
 
-    private final ObjectMapper objectMapper;
-
-    @GetMapping
-    public ResponseEntity<List<City>> select(){
-        List<City> cityList = cityService.getAllCity();
-        return ResponseEntity.ok(cityList);
-    }
 
     @GetMapping("/{cityId}")
-    public ResponseEntity<City> select(@PathVariable Long cityId){
+    public ResponseEntity<ExResponse> getCity(@PathVariable Long cityId) {
         City city = cityService.getCityById(cityId);
-        return ResponseEntity.ok(city);
-    }
-
-    @PutMapping
-    public ResponseEntity<String> update(@RequestBody City city){
-        cityService.update(city);
-        return ResponseEntity.ok("성공");
+        return ResponseEntity.ok(
+                new ExResponse.Builder<>(city)
+                        .setIsSucceed(true)
+                        .setIsWarning(false)
+                        .build());
     }
 
     @PostMapping
-    public String svaeTest(@Valid @RequestBody RequestDto<List<City>> requestDto){
-        requestDto.getRequest().forEach(city -> cityService.addCity(city));
-        return "SUCCESS";
+    public ResponseEntity<ExResponse> getCityList(@RequestBody RequestDto<CityDto.CityData> requestDto) {
+        Map<String, Object> cityList = cityService.getAllCity(requestDto.getRequest());
+        return ResponseEntity.ok(
+                new ExResponse.Builder<>(cityList)
+                        .setIsSucceed(true)
+                        .setIsWarning(false)
+                        .build());
+    }
+
+    @PutMapping
+    public ResponseEntity<ExResponse> mergeCity(@Valid @RequestBody RequestDto<List<City>> requestDto) {
+        cityService.mergeCity(requestDto.getRequest());
+        return ResponseEntity.ok(
+                new ExResponse.Builder<>("SUCCESS")
+                        .setIsSucceed(true)
+                        .setIsWarning(false)
+                        .build());
+    }
+
+    @DeleteMapping
+    public ResponseEntity<ExResponse> deleteCity(@RequestBody RequestDto<City> requestDto){
+        return ResponseEntity.ok(
+                new ExResponse.Builder<>("SUCCESS")
+                        .setIsSucceed(true)
+                        .setIsWarning(false)
+                        .build());
     }
 }
