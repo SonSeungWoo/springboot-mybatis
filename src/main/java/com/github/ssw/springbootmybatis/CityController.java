@@ -35,7 +35,7 @@ public class CityController {
 
     @PostMapping
     public ResponseEntity<ExResponse> getCityList(@RequestBody RequestDto<CityDto.CityData> requestDto) {
-        Map<String, Object> cityList = cityService.getAllCity(requestDto.getRequest());
+        CityDto.CityListData cityList = cityService.getAllCity(requestDto.getRequest());
         return ResponseEntity.ok(
                 new ExResponse.Builder<>(cityList)
                         .setIsSucceed(true)

@@ -11,7 +11,7 @@ import java.util.Map;
 public interface CityMapper {
     City selectCityById(Long cityId);
 
-    List<City> selectAllCity(CityDto.CityData city);
+    List<CityDto.CityData> selectAllCity(CityDto.CityData city);
 
     int totalCount();
 

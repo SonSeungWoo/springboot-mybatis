@@ -19,13 +19,13 @@ public class CityService {
         return cityMapper.selectCityById(cityId);
     }
 
-    public Map<String, Object> getAllCity(CityDto.CityData city) {
+    public CityDto.CityListData getAllCity(CityDto.CityData city) {
         city.setStartPage(city.getLimit().get(0));
         city.setEndPage(city.getLimit().get(1));
-        Map<String, Object> map = new HashMap<>();
-        map.put("list", cityMapper.selectAllCity(city));
-        map.put("total", cityMapper.totalCount());
-        return map;
+        CityDto.CityListData cityList = new CityDto.CityListData();
+        cityList.setTotal(cityMapper.totalCount());
+        cityList.setList(cityMapper.selectAllCity(city));
+        return cityList;
     }
 
     @Transactional

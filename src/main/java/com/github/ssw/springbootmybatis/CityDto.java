@@ -2,6 +2,8 @@ package com.github.ssw.springbootmybatis;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * Created by Leo.
  * User: sonseungwoo
@@ -17,5 +19,11 @@ public class CityDto {
         private String name;
         private String country;
         private Long population;
+    }
+
+    @Data
+    public static class CityListData{
+        private int total;
+        private List<CityDto.CityData> list;
     }
 }
