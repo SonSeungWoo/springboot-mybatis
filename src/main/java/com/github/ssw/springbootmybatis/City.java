@@ -12,6 +12,7 @@ public class City{
     private String name;
     private String country;
     private Long population;
+    private Person person;
 
     public City() {
     }

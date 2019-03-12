@@ -13,11 +13,27 @@
         <result column="population" property="population"/>
     </resultMap>
 
-    <select id="selectCityById" resultType="city">
+    <resultMap id="personResult" type="city">
+        <result property="cityId" column="CITY_ID"/>
+        <result property="cityCode" column="CITY_CODE"/>
+        <result property="name" column="NAME"/>
+        <result property="country" column="COUNTRY"/>
+        <result property="population" column="POPULATION"/>
+        <collection property="person" column="CITY_ID" javaType="person" ofType="person" select="getPersonByCityId"/>
+    </resultMap>
+
+    <select id="selectCityById" resultMap="personResult">
+      SELECT * FROM CITY WHERE CITY_ID = #{cityId}
+    </select>
+    <select id="getPersonByCityId" resultType="person">
+        SELECT * FROM person WHERE CITY_ID = #{cityId}
+    </select>
+
+    <!--<select id="selectCityById" resultType="city">
         SELECT *
           FROM CITY
          WHERE CITY_ID = #{cityId}
-    </select>
+    </select>-->
 
     <select id="selectAllCity" resultType="city" parameterType="com.github.ssw.springbootmybatis.CityDto$CityData">
         select *
