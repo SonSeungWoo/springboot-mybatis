@@ -2,6 +2,7 @@ package com.github.ssw.springbootmybatis;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -19,6 +20,7 @@ public class CityDto {
         private String name;
         private String country;
         private Long population;
+        private LocalDateTime insertDate;
     }
 
     @Data
