@@ -1,6 +1,7 @@
 package com.github.ssw.springbootmybatis;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,7 +63,7 @@ public class CityController {
                         .build());
     }
 
-    @GetMapping("/test")
+    @GetMapping(value = "/test", produces = MediaType.TEXT_HTML_VALUE)
     public ResponseEntity<String> resultHtml() {
         String html = "<html><body>test</body></html>";
         return ResponseEntity.ok(html);
