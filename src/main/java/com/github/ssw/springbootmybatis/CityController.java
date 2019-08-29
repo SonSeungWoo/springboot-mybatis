@@ -61,4 +61,11 @@ public class CityController {
                         .setIsWarning(false)
                         .build());
     }
+
+    @GetMapping("/test")
+    public ResponseEntity<String> resultHtml() {
+        String html = "<html><body>test</body></html>";
+        return ResponseEntity.ok(html);
+    }
+
 }
